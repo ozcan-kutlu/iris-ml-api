@@ -4,7 +4,9 @@ Bu proje, sklearn Iris veri seti ile production odaklı bir KNN pipeline eğitir
 
 ## Canlı Demo / API Dokümanı
 
-- Demo linkini buraya ekleyebilirsin: `https://...`
+- Canlı Demo (Swagger): [https://iris-ml-api-i3fy.onrender.com/docs](https://iris-ml-api-i3fy.onrender.com/docs)
+- API Base URL: [https://iris-ml-api-i3fy.onrender.com](https://iris-ml-api-i3fy.onrender.com)
+- Health Check: [https://iris-ml-api-i3fy.onrender.com/health](https://iris-ml-api-i3fy.onrender.com/health)
 - API dokümanı (`/docs`) production ortamında varsayılan olarak açık bırakılmamalıdır.
 
 ## Proje Yapısı
