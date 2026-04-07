@@ -1,69 +1,74 @@
-# Iris FastAPI ML Project
+# Iris FastAPI ML Projesi
 
-This project trains a production-oriented KNN pipeline on the sklearn Iris dataset and serves predictions with FastAPI.
+Bu proje, sklearn Iris veri seti ile production odakli bir KNN pipeline egitir ve FastAPI ile tahmin servisi sunar.
 
-## Project Structure
+## Canli Demo / API Dokumani
 
-- `app/main.py`: FastAPI app and routes
-- `app/schemas.py`: Request/response schemas
-- `app/services/predict.py`: Model loading and prediction logic
-- `ml/train.py`: KNN pipeline training and artifact generation
-- `ml/evaluate.py`: Evaluation helper
-- `artifacts/model.joblib`: Saved model artifact
-- `artifacts/model.sha256`: Artifact integrity hash
+- Demo linkini buraya ekleyebilirsin: `https://...`
+- API dokumani (`/docs`) production ortaminda varsayilan olarak acik birakilmamasi onerilir.
 
-## Setup
+## Proje Yapisi
+
+- `app/main.py`: FastAPI uygulamasi ve route tanimlari
+- `app/schemas.py`: Request/response semalari
+- `app/services/predict.py`: Model yukleme ve tahmin mantigi
+- `ml/train.py`: KNN pipeline egitimi ve artifact olusturma
+- `ml/evaluate.py`: Degerlendirme yardimci fonksiyonu
+- `artifacts/model.joblib`: Kaydedilen model artifact'i
+- `artifacts/model.sha256`: Artifact butunluk hash degeri
+
+## Kurulum
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-## Train the Model
+## Model Egitimi
 
 ```bash
 python -m ml.train
 ```
 
-After training, `artifacts/model.joblib` is created.
-The script also creates `artifacts/model.sha256` and the API validates artifact integrity before loading.
+Egitimden sonra `artifacts/model.joblib` olusur.
+Script ayrica `artifacts/model.sha256` dosyasini da olusturur ve API yukleme oncesinde artifact butunlugunu dogrular.
 
-Train with custom parameters:
+Ozel parametrelerle egitim:
 
 ```bash
 python -m ml.train --n-neighbors 7 --test-size 0.25 --random-state 123
 ```
 
-Train and save artifact to a custom path:
+Artifact'i farkli bir yola kaydetmek icin:
 
 ```bash
 python -m ml.train --artifact-path artifacts/model_v2.joblib
 ```
 
-## Run the API
+## API'yi Calistirma
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-## Endpoints
+## Endpoint'ler
 
 - `GET /health`
 - `GET /metrics`
 - `POST /predict`
 
-## Model Reliability Notes
+## Model Guvenilirligi Notlari
 
-- Training uses an sklearn `Pipeline` (`StandardScaler` + `KNeighborsClassifier`) to keep train and inference transformations consistent.
-- API reloads the model automatically when the artifact file changes.
-- API verifies `model.joblib` integrity against `model.sha256` on load.
+- Egitim, train ve inference donusumlerini tutarli tutmak icin sklearn `Pipeline` (`StandardScaler` + `KNeighborsClassifier`) kullanir.
+- Artifact dosyasi degistiginde API modeli otomatik olarak yeniden yukler.
+- API, yukleme sirasinda `model.joblib` dosyasini `model.sha256` ile dogrular.
 
-## Testing
+## Test
 
 ```bash
 pytest -q
 ```
 
-Example request body:
+Ornek request body:
 
 ```json
 {
@@ -74,7 +79,7 @@ Example request body:
 }
 ```
 
-Example response:
+Ornek response:
 
 ```json
 {
@@ -83,7 +88,7 @@ Example response:
 }
 ```
 
-Metrics response example:
+Ornek metrics response:
 
 ```json
 {
